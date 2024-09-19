@@ -21,8 +21,9 @@ def check_document_existance(user_doc_number):
     return doc_founded
 
 
-def get_doc_owner_name():
-    user_doc_number = input('Введите номер документа - ')
+def get_doc_owner_name(user_doc_number:str = None):
+    if not user_doc_number: #add for pytests
+        user_doc_number = input('Введите номер документа - ')
     print()
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
@@ -64,8 +65,9 @@ def append_doc_to_shelf(doc_number, shelf_number):
     directories[shelf_number].append(doc_number)
 
 
-def delete_doc():
-    user_doc_number = input('Введите номер документа - ')
+def delete_doc(user_doc_number = None):
+    if not user_doc_number: # add for pytest
+        user_doc_number = input('Введите номер документа - ')
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
         for current_document in documents:
@@ -76,8 +78,9 @@ def delete_doc():
                 return doc_number, True
 
 
-def get_doc_shelf():
-    user_doc_number = input('Введите номер документа - ')
+def get_doc_shelf(user_doc_number = None):
+    if user_doc_number == None:
+        user_doc_number = input('Введите номер документа - ')
     doc_exist = check_document_existance(user_doc_number)
     if doc_exist:
         for directory_number, directory_docs_list in directories.items():
@@ -85,9 +88,11 @@ def get_doc_shelf():
                 return directory_number
 
 
-def move_doc_to_shelf():
-    user_doc_number = input('Введите номер документа - ')
-    user_shelf_number = input('Введите номер полки для перемещения - ')
+def move_doc_to_shelf(user_doc_number = None, user_shelf_number = None):
+    if user_doc_number == None:
+        user_doc_number = input('Введите номер документа - ')
+    if user_shelf_number == None:
+        user_shelf_number = input('Введите номер полки для перемещения - ')
     remove_doc_from_shelf(user_doc_number)
     append_doc_to_shelf(user_doc_number, user_shelf_number)
     print('Документ номер "{}" был перемещен на полку номер "{}"'.format(user_doc_number, user_shelf_number))
@@ -106,11 +111,15 @@ def show_all_docs_info():
         show_document_info(current_document)
 
 
-def add_new_doc():
-    new_doc_number = input('Введите номер документа - ')
-    new_doc_type = input('Введите тип документа - ')
-    new_doc_owner_name = input('Введите имя владельца документа- ')
-    new_doc_shelf_number = input('Введите номер полки для хранения - ')
+def add_new_doc(new_doc_number = None, new_doc_type = None, new_doc_owner_name = None, new_doc_shelf_number = None):
+    if new_doc_number == None:
+        new_doc_number = input('Введите номер документа - ')
+    if new_doc_type == None:
+        new_doc_type = input('Введите тип документа - ')
+    if new_doc_owner_name == None:
+        new_doc_owner_name = input('Введите имя владельца документа- ')
+    if new_doc_shelf_number == None:
+        new_doc_shelf_number = input('Введите номер полки для хранения - ')
     new_doc = {
         "type": new_doc_type,
         "number": new_doc_number,
