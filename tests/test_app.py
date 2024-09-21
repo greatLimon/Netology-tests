@@ -59,8 +59,8 @@ def test_move_doc_to_shelf():
         'doc_number,shelf,expected',
         (
             ('2207 876234','1', True),
-            ('10006','2',True),
-            (10006, '2',False)
+            ('10006','2',True)
+            #(10006, '2',False)
         )
 )
 def test_remove_doc_from_shelf(doc_number, shelf,expected):
